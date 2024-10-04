@@ -43,6 +43,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation (libs.androidx.biometric) // Or the latest version
+    testImplementation (libs.mockito.mockito.core)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

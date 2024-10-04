@@ -11,8 +11,8 @@ import android.widget.EditText
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var editTextPin: EditText
-    private lateinit var btnPinVerify: Button
+    lateinit var editTextPin: EditText
+    lateinit var btnPinVerify: Button
     private lateinit var btnBiometric: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkBiometricAvailability() {
+    fun checkBiometricAvailability() {
         val biometricManager = BiometricManager.from(this)
         when (biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG)) {
             BiometricManager.BIOMETRIC_SUCCESS -> {
@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showBiometricPrompt() {
+    fun showBiometricPrompt() {
         val executor = ContextCompat.getMainExecutor(this)
 
         val biometricPrompt = BiometricPrompt(this, executor,
@@ -89,5 +89,22 @@ class MainActivity : AppCompatActivity() {
 
         biometricPrompt.authenticate(promptInfo)
     }
+
+    fun onAuthenticationSucceeded(authResult: BiometricPrompt.AuthenticationResult?) {
+        // Handle the successful authentication result
+        Toast.makeText(this, "Authentication succeeded!", Toast.LENGTH_SHORT).show()
+
+        // You can also extract details from authResult if needed
+        // Proceed to the next screen or functionality
+        // For example, navigate to the home screen or unlock sensitive features
+    }
+
+    fun onAuthenticationFailed() {
+        // Handle the failed authentication
+        Toast.makeText(this, "Authentication failed. Please try again.", Toast.LENGTH_SHORT).show()
+
+        // Optionally, you could track the number of failed attempts or provide additional feedback
+    }
+
 }
 
